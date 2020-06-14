@@ -41,10 +41,9 @@ namespace Raffle
         }
 
         [Import("proc_exit", Module = "wasi_snapshot_preview1")]
-        public int TerminateProcess(int rval)
+        public void TerminateProcess(int rval)
         {
             // yeah, like I'm gonna let some WASM code terminate my entire process...
-            return WASI_ERRNO_NOSYS;
         }
     }
 }
