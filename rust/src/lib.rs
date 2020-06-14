@@ -38,30 +38,10 @@ pub fn text_raffle(data: &str) -> String {
     let mut raffle = Raffle::new();
 
     for line in data.lines() {
-        let participant: Participant = line.into();
-        raffle.add_participant(participant);
+        raffle.add_participant(line.into());
     }
 
     raffle.draw_winner().display_name()
-}
-
-impl From<&str> for Participant {
-    fn from(row: &str) -> Self {
-        let vec: Vec<&str> = row.split(",").collect();
-
-        Participant {
-            first_name: vec[0].to_owned(),
-            last_name: none_if_empty(vec[1]),
-        }
-    }
-}
-
-fn none_if_empty(value: &str) -> Option<String> {
-    if value.is_empty() {
-        None
-    } else {
-        Some(value.to_owned())
-    }
 }
 
 #[cfg_attr(all(target_arch = "wasm32", target_os = "unknown"), wasm_bindgen)]
@@ -80,10 +60,7 @@ impl Participant {
     pub fn new(first_name: String, last_name: Option<String>) -> Participant {
         Participant {
             first_name: first_name,
-            last_name: match last_name {
-                Some(name) => Some(name),
-                None => None,
-            },
+            last_name: last_name,
         }
     }
 
@@ -129,5 +106,24 @@ impl Participant {
         }
 
         result
+    }
+}
+
+impl From<&str> for Participant {
+    fn from(row: &str) -> Self {
+        let vec: Vec<&str> = row.split(",").collect();
+
+        Participant {
+            first_name: vec[0].to_owned(),
+            last_name: none_if_empty(vec[1]),
+        }
+    }
+}
+
+fn none_if_empty(value: &str) -> Option<String> {
+    if value.is_empty() {
+        None
+    } else {
+        Some(value.to_owned())
     }
 }
