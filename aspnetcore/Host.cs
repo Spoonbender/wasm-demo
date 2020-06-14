@@ -9,6 +9,8 @@ namespace Raffle
         const int WASI_ERRNO_NOTSUP = 58;
         const int WASI_ERRNO_SUCCESS = 0;
 
+        const int WASI_ERRNO_NOSYS = 52;
+
         private RNGCryptoServiceProvider _random = new RNGCryptoServiceProvider();
 
         public Instance Instance { get; set; }
@@ -26,6 +28,23 @@ namespace Raffle
             return WASI_ERRNO_SUCCESS;
         }
 
-        
+        [Import("environ_get", Module = "wasi_snapshot_preview1")]
+        public int GetEnvironmentVariable(int environ, int environ_buf)
+        {
+            return WASI_ERRNO_NOSYS;
+        }
+
+        [Import("environ_sizes_get", Module = "wasi_snapshot_preview1")]
+        public int GetEnvironmentVariableSize(int environc, int environ_buf_size)
+        {
+            return WASI_ERRNO_NOSYS;
+        }
+
+        [Import("proc_exit", Module = "wasi_snapshot_preview1")]
+        public int TerminateProcess(int rval)
+        {
+            // yeah, like I'm gonna let some WASM code terminate my entire process...
+            return WASI_ERRNO_NOSYS;
+        }
     }
 }
