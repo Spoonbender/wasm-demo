@@ -1,19 +1,21 @@
-import raffle_lib = require("./wasm/raffle_core");
-const raffle: raffle_lib.Raffle = new raffle_lib.Raffle();
+import * as raffleLib from './wasm/raffle_core';
+const {Raffle, Participant} = raffleLib;
 
-raffle.add_participant(new raffle_lib.Participant("Magnus", "Mårtensson"));
-raffle.add_participant(new raffle_lib.Participant("Alon", "Fliess"));
-raffle.add_participant(new raffle_lib.Participant("Eran", "Stiller"));
-raffle.add_participant(new raffle_lib.Participant("Amir", "Zuker"));
-raffle.add_participant(new raffle_lib.Participant("Vitali", "Zaidman"));
-raffle.add_participant(new raffle_lib.Participant("Erez", "Pedro"));
-raffle.add_participant(new raffle_lib.Participant("Alex", "Pshul"));
-raffle.add_participant(new raffle_lib.Participant("Moaid", "Hathot"));
-raffle.add_participant(new raffle_lib.Participant("Ronen", "Levinson"));
-raffle.add_participant(new raffle_lib.Participant("Nir", "Dobovizki"));
-raffle.add_participant(new raffle_lib.Participant("Eyal", "Ellenbogen"));
-raffle.add_participant(new raffle_lib.Participant("Michael", "Donkhin"));
-raffle.add_participant(new raffle_lib.Participant("Vered", "Flis"));
+const raffle = new Raffle();
 
-console.log("Drawing winner...");
+raffle.add_participant(new Participant('Magnus', 'Mårtensson'));
+raffle.add_participant(new Participant('Alon', 'Fliess'));
+raffle.add_participant(new Participant('Eran', 'Stiller'));
+raffle.add_participant(new Participant('Amir', 'Zuker'));
+raffle.add_participant(new Participant('Vitali', 'Zaidman'));
+raffle.add_participant(new Participant('Erez', 'Pedro'));
+raffle.add_participant(new Participant('Alex', 'Pshul'));
+raffle.add_participant(new Participant('Moaid', 'Hathot'));
+raffle.add_participant(new Participant('Ronen', 'Levinson'));
+raffle.add_participant(new Participant('Nir', 'Dobovizki'));
+raffle.add_participant(new Participant('Eyal', 'Ellenbogen'));
+raffle.add_participant(new Participant('Michael', 'Donkhin'));
+raffle.add_participant(new Participant('Vered', 'Flis'));
+
+console.log('Drawing a winner...');
 console.log(raffle.draw_winner().display_name());

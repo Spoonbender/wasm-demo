@@ -4,17 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./app.js",
-    "tsc": "tsc"
+    "copy": "copyfiles wasm/* dist",
+    "start": "node ./dist/app.js",
+    "build": "tsc && npm run copy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "copyfiles": "^2.3.0",
+    "nodemon": "^2.0.4",
+    "typescript": "^3.9.3"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "typescript": "^3.9.3"
+    "express": "^4.17.1"
   }
 }
